@@ -44,6 +44,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn_somaClick(Sender: TObject);
     procedure btn_ResultadoClick(Sender: TObject);
+    procedure btn_subtracaoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -157,7 +158,7 @@ end;
 
 procedure TForm1.btn_ResultadoClick(Sender: TObject);
 var
-  teste, teste2, teste3 : string;
+  teste, teste2, teste3,mensagem : string;
 begin
      //Recebendo valores com função copy, pos, pred e Succ
      valor1 := StrToFloat(Copy(pnlTela_Calculadora.Caption,1,Pred(Pos('+',pnlTela_Calculadora.Caption))));
@@ -166,27 +167,39 @@ begin
      //Testando o tipo de operador e efetuando a operação
      case operacao of
 
-     Soma: resultado := valor1 + valor2;
-
+     Soma:
+     begin
+          resultado := valor1 + valor2;
+     end;
      Subtracao: resultado := valor1 - valor2;
 
      Divisao: resultado := valor1 / valor2;
 
      Multiplicacao: resultado := valor1 * valor2;
 
+
      end;
+        mensagem := FloatToStr(resultado);
+           ShowMessage(mensagem);
 
 
 
      //Testando aplicação, deletar no futuro
-      teste := FloatToStr(valor1);
-      teste2 := FloatToStr(valor2);
-      teste3 := FloatToStr(resultado);
-     ShowMessage('Resultado: '+ teste);
-     ShowMessage('Resultado: '+ teste2);
-     ShowMessage('Resultado: '+ teste3);
+      //teste := FloatToStr(valor1);
+      //teste2 := FloatToStr(valor2);
+     // teste3 := FloatToStr(resultado);
+     //ShowMessage('Resultado: '+ teste);
+     //ShowMessage('Resultado: '+ teste2);
+     //ShowMessage('Resultado: '+ teste3);
 
 
+end;
+
+procedure TForm1.btn_subtracaoClick(Sender: TObject);
+begin
+ pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '-';
+
+  operacao := Subtracao;
 end;
 
 end.

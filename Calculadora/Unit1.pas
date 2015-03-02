@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, StdCtrls, ExtCtrls,TypInfo;
+  Dialogs, Menus, StdCtrls, ExtCtrls;
 
 type
   TOperacao  = (Multiplicacao,Soma,Divisao,Subtracao);
@@ -44,6 +44,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn_somaClick(Sender: TObject);
     procedure btn_ResultadoClick(Sender: TObject);
+    procedure btn_subtracaoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -58,7 +59,7 @@ var
     valor1, valor2,resultado : real;
     operacao : TOperacao;
 const
-  tipo_operacao: array [0..4] of string = ('soma','multiplicacao','subtracao','divisao','resultado');
+  opr: array[Multiplicacao..Subtracao] of string = ('*', '+', '/', '-');
 
 implementation
 
@@ -149,6 +150,7 @@ begin
   pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '+';
 
   operacao := Soma;
+
   //valor2 := StrToFloat(pnlTela_Calculadora.Caption);
 
 
@@ -157,40 +159,50 @@ end;
 
 procedure TForm1.btn_ResultadoClick(Sender: TObject);
 var
-  teste, teste2, teste3,s: string;
+  teste, teste2, teste3,mensagem : string;
 begin
+
+      
      //Recebendo valores com função copy, pos, pred e Succ
-     valor1 := StrToFloat(Copy(pnlTela_Calculadora.Caption,1,Pred(Pos('+',pnlTela_Calculadora.Caption))));
-     valor2 := StrToFloat(Copy(pnlTela_Calculadora.Caption,Succ(Pos('+',pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
+     valor1 := StrToFloat(Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(opr[Multiplicacao],pnlTela_Calculadora.Caption))));
+     valor2 := StrToFloat(Copy(pnlTela_Calculadora.Caption,Succ(Pos(opr[Multiplicacao],pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
 
      //Testando o tipo de operador e efetuando a operação
      case operacao of
 
-     Soma: resultado := valor1 + valor2;
-
+     Soma:
+     begin
+          resultado := valor1 + valor2;
+     end;
      Subtracao: resultado := valor1 - valor2;
 
      Divisao: resultado := valor1 / valor2;
 
      Multiplicacao: resultado := valor1 * valor2;
 
-          s := GetTOperacao(TypeInfo(TOperacao));
-
 
      end;
-
+        mensagem := FloatToStr(resultado);
+           ShowMessage(mensagem);
 
 
 
      //Testando aplicação, deletar no futuro
-      teste := FloatToStr(valor1);
-      teste2 := FloatToStr(valor2);
-      teste3 := FloatToStr(resultado);
-     ShowMessage('Resultado: '+ teste);
-     ShowMessage('Resultado: '+ teste2);
-     ShowMessage('Resultado: '+ teste3);
+      //teste := FloatToStr(valor1);
+      //teste2 := FloatToStr(valor2);
+     // teste3 := FloatToStr(resultado);
+     //ShowMessage('Resultado: '+ teste);
+     //ShowMessage('Resultado: '+ teste2);
+     //ShowMessage('Resultado: '+ teste3);
 
 
+end;
+
+procedure TForm1.btn_subtracaoClick(Sender: TObject);
+begin
+ pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '-';
+
+  operacao := Subtracao;
 end;
 
 end.

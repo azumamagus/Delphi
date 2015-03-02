@@ -66,6 +66,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      OnClick = btn_subtracaoClick
     end
     object btn_multiplicacao: TButton
       Left = 160
