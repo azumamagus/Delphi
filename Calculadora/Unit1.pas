@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, StdCtrls, ExtCtrls;
+  Dialogs, Menus, StdCtrls, ExtCtrls,TypInfo;
 
 type
   TOperacao  = (Multiplicacao,Soma,Divisao,Subtracao);
@@ -56,6 +56,7 @@ type
 var
   Form1: TForm1;
     valor1, valor2,resultado : real;
+    operacao : TOperacao;
 const
   tipo_operacao: array [0..4] of string = ('soma','multiplicacao','subtracao','divisao','resultado');
 
@@ -147,7 +148,7 @@ begin
 
   pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '+';
 
-  TOperacao = Soma;
+  operacao := Soma;
   //valor2 := StrToFloat(pnlTela_Calculadora.Caption);
 
 
@@ -156,20 +157,29 @@ end;
 
 procedure TForm1.btn_ResultadoClick(Sender: TObject);
 var
-  teste, teste2, teste3 : string;
+  teste, teste2, teste3,s: string;
 begin
      //Recebendo valores com função copy, pos, pred e Succ
      valor1 := StrToFloat(Copy(pnlTela_Calculadora.Caption,1,Pred(Pos('+',pnlTela_Calculadora.Caption))));
      valor2 := StrToFloat(Copy(pnlTela_Calculadora.Caption,Succ(Pos('+',pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
 
      //Testando o tipo de operador e efetuando a operação
-     case TOperacao of
+     case operacao of
 
-     Soma
-     resultado :  resultado = valor1 + valor2;
+     Soma: resultado := valor1 + valor2;
 
-     
+     Subtracao: resultado := valor1 - valor2;
+
+     Divisao: resultado := valor1 / valor2;
+
+     Multiplicacao: resultado := valor1 * valor2;
+
+          s := GetTOperacao(TypeInfo(TOperacao));
+
+
      end;
+
+
 
 
      //Testando aplicação, deletar no futuro

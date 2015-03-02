@@ -56,6 +56,7 @@ type
 var
   Form1: TForm1;
     valor1, valor2,resultado : real;
+    operacao : TOperacao;
 const
   tipo_operacao: array [0..4] of string = ('soma','multiplicacao','subtracao','divisao','resultado');
 
@@ -147,7 +148,7 @@ begin
 
   pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '+';
 
-  TOperacao = Soma;
+  operacao := Soma;
   //valor2 := StrToFloat(pnlTela_Calculadora.Caption);
 
 
@@ -163,13 +164,18 @@ begin
      valor2 := StrToFloat(Copy(pnlTela_Calculadora.Caption,Succ(Pos('+',pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
 
      //Testando o tipo de operador e efetuando a operação
-     case TOperacao of
+     case operacao of
 
-     Soma
-     resultado :  resultado = valor1 + valor2;
+     Soma: resultado := valor1 + valor2;
 
-     
+     Subtracao: resultado := valor1 - valor2;
+
+     Divisao: resultado := valor1 / valor2;
+
+     Multiplicacao: resultado := valor1 * valor2;
+
      end;
+
 
 
      //Testando aplicação, deletar no futuro
