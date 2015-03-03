@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 480
   Top = 241
   Width = 217
-  Height = 255
+  Height = 256
   AutoSize = True
   Caption = 'Calculadora'
   Color = clBtnFace
@@ -81,6 +81,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      OnClick = btn_multiplicacaoClick
     end
     object btn_divisao: TButton
       Left = 120
@@ -95,6 +96,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      OnClick = btn_divisaoClick
     end
     object btn_9: TButton
       Left = 7

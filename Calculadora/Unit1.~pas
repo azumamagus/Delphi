@@ -7,7 +7,7 @@ uses
   Dialogs, Menus, StdCtrls, ExtCtrls;
 
 type
-  TOperacao  = (Multiplicacao,Soma,Divisao,Subtracao);
+  TOperacao  = (Multiplicacao,Soma,Divisao,Subtracao); // Declaração do Tipo Enumerado
   TForm1 = class(TForm)
     pnl1: TPanel;
     btn_Resultado: TButton;
@@ -45,6 +45,14 @@ type
     procedure btn_somaClick(Sender: TObject);
     procedure btn_ResultadoClick(Sender: TObject);
     procedure btn_subtracaoClick(Sender: TObject);
+    function StrToEnumerado(var s: String; const AString:
+array of string; const AEnumerados: array of variant): variant;
+function EnumeradoToStr(s: variant; const AString:
+array of string; const AEnumerados: array of variant): String;
+function StrToOperacao(valor: String): TOperacao;
+function OperacaoToStr(operacao: TOperacao): String;
+    procedure btn_divisaoClick(Sender: TObject);
+    procedure btn_multiplicacaoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -58,8 +66,7 @@ var
   Form1: TForm1;
     valor1, valor2,resultado : real;
     operacao : TOperacao;
-const
-  tipo_operacao: array [0..4] of string = ('soma','multiplicacao','subtracao','divisao','resultado');
+
 
 implementation
 
@@ -136,7 +143,7 @@ procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
     Key := numeros(key);
     if Key = #8 then
-    
+
         //pnlTela_Calculadora.Caption := Key;
         pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;
 end;
@@ -150,19 +157,53 @@ begin
   pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '+';
 
   operacao := Soma;
+
   //valor2 := StrToFloat(pnlTela_Calculadora.Caption);
 
 
 
 end;
 
+function TForm1.EnumeradoToStr(s: variant; const AString:
+array of string; const AEnumerados: array of variant): String; // A ideia de variaveis const e que elas nao podem mudar
+var
+i: integer;
+begin
+  result := '';
+  //Low pega o indice mais baixo do array
+  //Higj pega o indice mais alto do array
+  for i := Low(AEnumerados) to High(AEnumerados) do
+    if AEnumerados[i] = s then
+      result := AString[i];  //result é o retorno da função [Padrão do Delphi para retorno]
+end;
+
+function TForm1.StrToEnumerado(var s: String; const AString:
+array of string; const AEnumerados: array of variant): variant;
+var
+i: integer;
+begin
+result := -1;
+  for i := Low(AString) to High(AString) do
+    if AnsiSameText(s, AString[i]) then
+      result := AEnumerados[i];
+end;
+
+function TForm1.StrToOperacao(valor: String): TOperacao;
+begin
+result := StrToEnumerado(valor, ['+', '-', '/', '*'], [Soma, Subtracao, Divisao, Multiplicacao]);
+end;
+
+
+
 procedure TForm1.btn_ResultadoClick(Sender: TObject);
 var
-  teste, teste2, teste3,mensagem : string;
+  teste, teste2, teste3,mensagem, expressao, operador, strValor1, strValor2 : string;
+  i, ind: integer;
 begin
-     //Recebendo valores com função copy, pos, pred e Succ
-     valor1 := StrToFloat(Copy(pnlTela_Calculadora.Caption,1,Pred(Pos('+',pnlTela_Calculadora.Caption))));
-     valor2 := StrToFloat(Copy(pnlTela_Calculadora.Caption,Succ(Pos('+',pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
+
+
+      valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
+      valor2 := StrToFloat((Copy(pnlTela_Calculadora.Caption,Succ(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption))));
 
      //Testando o tipo de operador e efetuando a operação
      case operacao of
@@ -180,7 +221,8 @@ begin
 
      end;
         mensagem := FloatToStr(resultado);
-           ShowMessage(mensagem);
+         pnlTela_Calculadora.Caption := mensagem;
+         
 
 
 
@@ -200,6 +242,25 @@ begin
  pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '-';
 
   operacao := Subtracao;
+end;
+
+procedure TForm1.btn_divisaoClick(Sender: TObject);
+begin
+      pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '/';
+
+  operacao := Divisao;
+end;
+
+procedure TForm1.btn_multiplicacaoClick(Sender: TObject);
+begin
+    pnlTela_Calculadora.Caption:= pnlTela_Calculadora.Caption + '*';
+
+     operacao := Multiplicacao;
+end;
+
+function TForm1.OperacaoToStr(operacao: TOperacao): String;
+begin
+  result := EnumeradoToStr(operacao, ['+', '-', '/' , '*'], [Soma, Subtracao, Divisao, Multiplicacao]);
 end;
 
 end.

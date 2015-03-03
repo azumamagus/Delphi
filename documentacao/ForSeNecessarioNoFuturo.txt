@@ -1,0 +1,49 @@
+     expressao := pnlTela_Calculadora.Caption;
+     //for usando para pegar o primeiro número antes do simbolo operador
+     for i := 1 to Length(expressao) do
+     begin
+        if (expressao[i] in ['0'..'9']) then // Usando ['0'..'9'] como String para poder concatenar
+        begin
+          strValor1 := strValor1 + expressao[i];
+        end
+        else
+        begin
+         ind := i;
+         break;
+        end;
+     end;
+      //for usando para pegar o simbolo do operador
+     for i := ind to Length(expressao) do
+     begin
+        if (expressao[i] in ['+', '-', '/', '*']) then
+        begin
+          operador := operador + expressao[i];
+        end
+        else
+        begin
+         ind := i;
+         break;
+        end;
+     end;
+
+     operador := Trim(operador); //Função Trim usada para limpar os espaços das extremidades (direita/esquerda)
+     operacao := StrToOperacao(operador);
+
+     //for usando para pegar o número digitado pós operador
+     for i := ind to Length(expressao) do
+     begin
+        if (expressao[i] in ['0'..'9']) then
+        begin
+          strValor2 := strValor2 + expressao[i];
+        end
+        else
+        begin
+         ind := i;
+         break;
+        end;
+     end;
+
+
+     //Recebendo valores com função copy, pos, pred e Succ
+     valor1 := StrToFloat(strValor1);   // desconsiderado (Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(opr[Soma],pnlTela_Calculadora.Caption))));
+     valor2 := StrToFloat(strValor2);   //desconsiderado (Copy(pnlTela_Calculadora.Caption,Succ(Pos(opr[Soma],pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption)));
