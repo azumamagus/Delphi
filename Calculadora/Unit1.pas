@@ -142,7 +142,7 @@ end;
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
     Key := numeros(key);
-    if Key = #8 then
+   // if Key = #8 then
 
         //pnlTela_Calculadora.Caption := Key;
         pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;

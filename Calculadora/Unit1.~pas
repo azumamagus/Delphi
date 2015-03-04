@@ -220,6 +220,7 @@ begin
 
 
      end;
+     //Atribuindo  valor dos resultados das expressões ao Panel
         mensagem := FloatToStr(resultado);
          pnlTela_Calculadora.Caption := mensagem;
          
