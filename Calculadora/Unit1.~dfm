@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDesktopCenter
   WindowMenu = TopMenu
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
@@ -25,9 +26,9 @@ object Form1: TForm1
     TabOrder = 0
     object btn_Resultado: TButton
       Left = 120
-      Top = 180
+      Top = 184
       Width = 75
-      Height = 23
+      Height = 19
       Caption = '='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -36,6 +37,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      TabStop = False
       OnClick = btn_ResultadoClick
     end
     object btn_soma: TButton
@@ -51,6 +53,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      TabStop = False
       OnClick = btn_somaClick
     end
     object btn_subtracao: TButton
@@ -66,6 +69,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      TabStop = False
       OnClick = btn_subtracaoClick
     end
     object btn_multiplicacao: TButton
@@ -81,6 +85,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      TabStop = False
       OnClick = btn_multiplicacaoClick
     end
     object btn_divisao: TButton
@@ -96,6 +101,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      TabStop = False
       OnClick = btn_divisaoClick
     end
     object btn_9: TButton
@@ -111,6 +117,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      TabStop = False
       OnClick = btn_9Click
     end
     object btn_8: TButton
@@ -126,6 +133,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 6
+      TabStop = False
       OnClick = btn_8Click
     end
     object btn_7: TButton
@@ -141,6 +149,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 7
+      TabStop = False
       OnClick = btn_7Click
     end
     object btn_0: TButton
@@ -156,6 +165,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 8
+      TabStop = False
       OnClick = btn_0Click
     end
     object btn_zerar: TButton
@@ -171,6 +181,7 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 9
+      TabStop = False
       OnClick = btn_zerarClick
     end
     object pnlTela_Calculadora: TPanel
@@ -195,6 +206,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    TabStop = False
     OnClick = btn_4Click
   end
   object btn_5: TButton
@@ -210,6 +222,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    TabStop = False
     OnClick = btn_5Click
   end
   object btn_6: TButton
@@ -225,6 +238,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    TabStop = False
     OnClick = btn_6Click
   end
   object btn_1: TButton
@@ -240,6 +254,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    TabStop = False
     OnClick = btn_1Click
   end
   object btn_2: TButton
@@ -255,6 +270,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+    TabStop = False
     OnClick = btn_2Click
   end
   object btn_3: TButton
@@ -270,6 +286,7 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+    TabStop = False
     OnClick = btn_3Click
   end
   object pm1: TPopupMenu

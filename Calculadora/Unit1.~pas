@@ -133,7 +133,7 @@ function TForm1.numeros (Key:Char) : Char;
 begin
 
   //Trantando números inseridos no teclado
-  if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*'])) then
+  if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
     Result := #0
   else
     Result:=key;
@@ -142,7 +142,13 @@ end;
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
     Key := numeros(key);
-   // if Key = #8 then
+
+    if Key =#13 then
+    begin
+         btn_Resultado.Click;
+    end
+    else
+
 
         //pnlTela_Calculadora.Caption := Key;
         pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;
@@ -201,6 +207,7 @@ var
   i, ind: integer;
 begin
 
+    //  if not Key=#13 then
 
       valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
       valor2 := StrToFloat((Copy(pnlTela_Calculadora.Caption,Succ(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption))));

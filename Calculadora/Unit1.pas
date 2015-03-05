@@ -143,6 +143,13 @@ procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
     Key := numeros(key);
 
+    if Key =#13 then
+    begin
+         btn_Resultado.Click;
+    end
+    else
+
+
         //pnlTela_Calculadora.Caption := Key;
         pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;
 end;
@@ -201,6 +208,7 @@ var
 begin
 
 
+      //Quebrando a String
       valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
       valor2 := StrToFloat((Copy(pnlTela_Calculadora.Caption,Succ(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption))));
 
