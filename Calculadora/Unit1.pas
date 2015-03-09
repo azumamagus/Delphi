@@ -50,15 +50,17 @@ array of string; const AEnumerados: array of variant): variant;
 function EnumeradoToStr(s: variant; const AString:
 array of string; const AEnumerados: array of variant): String;
 function StrToOperacao(valor: String): TOperacao;
-function OperacaoToStr(operacao: TOperacao): String;
+
     procedure btn_divisaoClick(Sender: TObject);
     procedure btn_multiplicacaoClick(Sender: TObject);
 
   private
     { Private declarations }
+    function OperacaoToStr(operacao: TOperacao): String;
   public
     { Public declarations }
     function numeros (key:Char) : Char;
+
 
   end;
 
@@ -133,7 +135,7 @@ function TForm1.numeros (Key:Char) : Char;
 begin
 
   //Trantando números inseridos no teclado
-  if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
+   if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
     Result := #0
   else
     Result:=key;
@@ -141,17 +143,40 @@ end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
 begin
+  if Key = #13 then
+  begin
+    btn_Resultado.Click;
+  end
+  else
+  begin
     Key := numeros(key);
+  end;
 
-    if Key =#13 then
-    begin
-         btn_Resultado.Click;
-    end
-    else
-
-
-        //pnlTela_Calculadora.Caption := Key;
-        pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;
+  if Key ='+' then
+  begin
+    operacao := Soma;
+     pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + '+';
+  end
+  else if Key ='-' then
+  begin
+    operacao := Subtracao;
+     pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + '-';
+  end
+  else if Key ='*' then
+  begin
+    operacao := Multiplicacao;
+     pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + '*';
+  end
+  else if Key ='/' then
+  begin
+    operacao := Divisao;
+     pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + '/';
+  end
+  else
+  begin
+    //pnlTela_Calculadora.Caption := Key;
+    pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + key;
+  end;
 end;
 
 
@@ -206,7 +231,6 @@ var
   teste, teste2, teste3,mensagem, expressao, operador, strValor1, strValor2 : string;
   i, ind: integer;
 begin
-
 
       //Quebrando a String
       valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
@@ -268,7 +292,7 @@ end;
 
 function TForm1.OperacaoToStr(operacao: TOperacao): String;
 begin
-  result := EnumeradoToStr(operacao, ['+', '-', '/' , '*'], [Soma, Subtracao, Divisao, Multiplicacao]);
+  result := EnumeradoToStr(Ord(operacao), ['+', '-', '/' , '*'], [Soma, Subtracao, Divisao, Multiplicacao]);
 end;
 
 end.
