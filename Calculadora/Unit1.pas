@@ -62,13 +62,14 @@ function StrToOperacao(valor: String): TOperacao;
     function numeros (key:Char) : Char;
 
 
+
   end;
 
 var
   Form1: TForm1;
     valor1, valor2,resultado : real;
     operacao : TOperacao;
-
+    qte_char : integer;
 
 implementation
 
@@ -142,7 +143,18 @@ begin
 end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
+
 begin
+
+  if key = #8 then
+  begin
+   qte_char := Length(pnlTela_Calculadora.Caption);
+    if (qte_char > 0) then
+    begin
+      pnlTela_Calculadora.Caption := Copy(pnlTela_Calculadora.Caption,1,Length(pnlTela_Calculadora.Caption)-1);
+    end;
+  end;
+
   if Key = #13 then
   begin
     btn_Resultado.Click;

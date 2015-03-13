@@ -62,13 +62,14 @@ function StrToOperacao(valor: String): TOperacao;
     function numeros (key:Char) : Char;
 
 
+
   end;
 
 var
   Form1: TForm1;
     valor1, valor2,resultado : real;
     operacao : TOperacao;
-
+    qte_char : integer;
 
 implementation
 
@@ -135,21 +136,32 @@ function TForm1.numeros (Key:Char) : Char;
 begin
 
   //Trantando números inseridos no teclado
-  if key=#13 then
-  begin
-     btn_Resultado.Click;
-     Exit;
-  end
-  else if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
+   if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
     Result := #0
   else
     Result:=key;
 end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-begin
-  Key := numeros(key);
 
+begin
+
+  if key = #8 then
+   qte_char := Length(pnlTela_Calculadora.Caption);
+  if (qte_char > 0) then
+  begin
+    pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption -1;
+  end;
+
+
+  if Key = #13 then
+  begin
+    btn_Resultado.Click;
+  end
+  else
+  begin
+    Key := numeros(key);
+  end;
 
   if Key ='+' then
   begin
