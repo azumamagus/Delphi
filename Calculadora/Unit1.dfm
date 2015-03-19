@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 480
   Top = 241
   Width = 217
-  Height = 256
+  Height = 255
   AutoSize = True
   Caption = 'Calculadora'
   Color = clBtnFace

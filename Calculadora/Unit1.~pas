@@ -69,7 +69,7 @@ var
   Form1: TForm1;
     valor1, valor2,resultado : real;
     operacao : TOperacao;
-    qte_char : integer;
+
 
 implementation
 
@@ -136,23 +136,25 @@ function TForm1.numeros (Key:Char) : Char;
 begin
 
   //Trantando números inseridos no teclado
-   if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
+   if not (((key in ['0'..'9'])) or (key in ['-','/','+','*',','])) then
     Result := #0
   else
     Result:=key;
 end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-
+var
+    qte_char : integer;
 begin
 
   if key = #8 then
-   qte_char := Length(pnlTela_Calculadora.Caption);
-  if (qte_char > 0) then
   begin
-    pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption -1;
+   qte_char := Length(pnlTela_Calculadora.Caption);
+    if (qte_char > 0) then
+    begin
+      pnlTela_Calculadora.Caption := Copy(pnlTela_Calculadora.Caption,1,Length(pnlTela_Calculadora.Caption)-1);
+    end;
   end;
-
 
   if Key = #13 then
   begin
@@ -242,6 +244,13 @@ var
   teste, teste2, teste3,mensagem, expressao, operador, strValor1, strValor2 : string;
   i, ind: integer;
 begin
+      IF Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption) = 0 then
+      begin
+        pnlTela_Calculadora.Caption := pnlTela_Calculadora.Caption + pnlTela_Calculadora.Caption;
+      end
+      else
+      begin
+
 
       //Quebrando a String
       valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
@@ -250,7 +259,7 @@ begin
      //Testando o tipo de operador e efetuando a operação
      case operacao of
 
-     Soma:
+      Soma:
      begin
           resultado := valor1 + valor2;
      end;
@@ -265,7 +274,7 @@ begin
      //Atribuindo  valor dos resultados das expressões ao Panel
         mensagem := FloatToStr(resultado);
          pnlTela_Calculadora.Caption := mensagem;
-         
+     end;
 
 
 

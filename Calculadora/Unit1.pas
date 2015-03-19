@@ -69,7 +69,7 @@ var
   Form1: TForm1;
     valor1, valor2,resultado : real;
     operacao : TOperacao;
-    qte_char : integer;
+
 
 implementation
 
@@ -128,6 +128,7 @@ end;
 procedure TForm1.btn_zerarClick(Sender: TObject);
 begin
   pnlTela_Calculadora.Caption := '';
+  Self.SetFocus;
 end;
 
 
@@ -136,14 +137,15 @@ function TForm1.numeros (Key:Char) : Char;
 begin
 
   //Trantando números inseridos no teclado
-   if not (((key in ['0'..'9', #8])) or (key in ['-','/','+','*',','])) then
+   if not (((key in ['0'..'9'])) or (key in ['-','/','+','*',','])) then
     Result := #0
   else
     Result:=key;
 end;
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-
+var
+    qte_char : integer;
 begin
 
   if key = #8 then
@@ -240,18 +242,25 @@ end;
 
 procedure TForm1.btn_ResultadoClick(Sender: TObject);
 var
-  teste, teste2, teste3,mensagem, expressao, operador, strValor1, strValor2 : string;
-  i, ind: integer;
+  teste, teste2, teste3,mensagem, expressao, operador, strValor1, strValor2 , finalacumulado,testeoperacao1,testeoperacao2 : string;
+  i, ind : integer;
+  resultado_operacao : Real;
 begin
-
+      IF Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption) = 0 then
+      begin
+        valor1 := StrToFloat(Trim(pnlTela_Calculadora.Caption));
+        valor2 := StrToFloat(Trim(pnlTela_Calculadora.Caption));
+      end
+      else
+      begin
       //Quebrando a String
-      valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
-      valor2 := StrToFloat((Copy(pnlTela_Calculadora.Caption,Succ(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption))));
-
+        valor1 := StrToFloat((Copy(pnlTela_Calculadora.Caption,1,Pred(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)))));
+        valor2 := StrToFloat((Copy(pnlTela_Calculadora.Caption,Succ(Pos(OperacaoToStr(operacao),pnlTela_Calculadora.Caption)), Length(pnlTela_Calculadora.Caption))));
+      end;
      //Testando o tipo de operador e efetuando a operação
      case operacao of
 
-     Soma:
+      Soma:
      begin
           resultado := valor1 + valor2;
      end;
@@ -266,7 +275,7 @@ begin
      //Atribuindo  valor dos resultados das expressões ao Panel
         mensagem := FloatToStr(resultado);
          pnlTela_Calculadora.Caption := mensagem;
-         
+
 
 
 
