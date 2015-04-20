@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, ZConnection, DB, ZAbstractRODataset, ZAbstractDataset,
+  ZAbstractTable, ZDataset;
 
 type
   TForm1 = class(TForm)
@@ -14,6 +15,8 @@ type
     edtSenha: TEdit;
     btnEntrar: TButton;
     btnCancelar: TButton;
+    ZConnection1: TZConnection;
+    ZTable1: TZTable;
     procedure btnEntrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private

@@ -52,7 +52,7 @@ object Form1: TForm1
     Top = 51
     Width = 137
     Height = 21
-    Hint = 'teste'
+    Hint = 'CAPS LOCK ligado'
     ParentShowHint = False
     PasswordChar = '*'
     ShowHint = False
@@ -76,5 +76,16 @@ object Form1: TForm1
     Caption = 'Cancelar'
     ModalResult = 2
     TabOrder = 3
+  end
+  object ZConnection1: TZConnection
+    Protocol = 'postgresql-8'
+    HostName = '192.168.25.80'
+    Port = 5432
+    Database = 'programa'
+    User = 'postgres'
+    Password = 'dificil!@#$'
+    Connected = True
+    Left = 8
+    Top = 104
   end
 end

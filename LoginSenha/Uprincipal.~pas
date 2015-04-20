@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, ZConnection;
 
 type
   TForm1 = class(TForm)
@@ -14,6 +14,7 @@ type
     edtSenha: TEdit;
     btnEntrar: TButton;
     btnCancelar: TButton;
+    ZConnection1: TZConnection;
     procedure btnEntrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -46,11 +47,11 @@ procedure TForm1.FormShow(Sender: TObject);
 begin
   if GetKeyState(VK_CAPITAL)= 0 then   //CAPS LOCK Desligado
   begin
-   
+       edtSenha.ShowHint := True;
   end
   else
   begin
-
+      edtSenha.ShowHint := False;
   end;
 end;
 

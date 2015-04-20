@@ -77,4 +77,21 @@ object Form1: TForm1
     ModalResult = 2
     TabOrder = 3
   end
+  object ZConnection1: TZConnection
+    Protocol = 'postgresql-8'
+    HostName = '192.168.25.80'
+    Port = 5432
+    Database = 'programa'
+    User = 'postgres'
+    Password = 'dificil!@#$'
+    Connected = True
+    Left = 8
+    Top = 104
+  end
+  object ZTable1: TZTable
+    Connection = ZConnection1
+    TableName = 'users'
+    Left = 40
+    Top = 104
+  end
 end
