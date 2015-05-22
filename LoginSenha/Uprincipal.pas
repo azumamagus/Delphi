@@ -16,7 +16,9 @@ type
     btnEntrar: TButton;
     btnCancelar: TButton;
     ZConnection1: TZConnection;
-    ZTable1: TZTable;
+    zqryrel1: TZQuery;
+    ds1: TDataSource;
+    ds2: TDataSource;
     procedure btnEntrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -55,6 +57,9 @@ begin
   begin
       edtSenha.ShowHint := False;
   end;
+
+  zqryrel1.SQL.Text :=
+
 end;
 
 end.

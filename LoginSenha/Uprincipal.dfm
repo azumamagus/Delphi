@@ -88,10 +88,21 @@ object Form1: TForm1
     Left = 8
     Top = 104
   end
-  object ZTable1: TZTable
+  object zqryrel1: TZQuery
     Connection = ZConnection1
-    TableName = 'users'
+    SQL.Strings = (
+      'select nome,senha from users')
+    Params = <>
     Left = 40
     Top = 104
+  end
+  object ds1: TDataSource
+    DataSet = zqryrel1
+    Left = 72
+    Top = 120
+  end
+  object ds2: TDataSource
+    Left = 8
+    Top = 72
   end
 end
