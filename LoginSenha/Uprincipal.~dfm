@@ -101,4 +101,8 @@ object Form1: TForm1
     Left = 72
     Top = 120
   end
+  object ds2: TDataSource
+    Left = 8
+    Top = 72
+  end
 end

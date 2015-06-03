@@ -18,6 +18,7 @@ type
     ZConnection1: TZConnection;
     zqryrel1: TZQuery;
     ds1: TDataSource;
+    ds2: TDataSource;
     procedure btnEntrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private

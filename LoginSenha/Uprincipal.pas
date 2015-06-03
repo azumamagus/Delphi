@@ -48,6 +48,7 @@ begin
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
+
 begin
   if GetKeyState(VK_CAPITAL)= 0 then   //CAPS LOCK Desligado
   begin
@@ -58,7 +59,18 @@ begin
       edtSenha.ShowHint := False;
   end;
 
-  zqryrel1.SQL.Text :=
+  zqryrel1.SQL.Text := 'SELECT nome,senha FROM users WHERE nome =' + edtUsuario.text + 'AND senha=' + edtSenha.Text + ';' ;
+  zqryrel1.Open;
+    if zqryrel1.RecordCount = 0 then
+    begin
+      ShowMessage('Senha correta!');
+    end
+    else
+    begin
+      ShowMessage('Senha incorreta!');
+    end;
+
+
 
 end;
 
