@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ZConnection, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZAbstractTable, ZDataset;
+  ZAbstractTable, ZDataset, ZAbstractConnection;
 
 type
   TForm1 = class(TForm)
@@ -22,7 +22,7 @@ type
     procedure btnEntrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    tentativas : SmallInt;
+  //  tentativas : SmallInt;
     { Private declarations }
   public
     { Public declarations }
@@ -59,15 +59,19 @@ begin
       edtSenha.ShowHint := False;
   end;
 
-  zqryrel1.SQL.Text := 'SELECT nome,senha FROM users WHERE nome =' + edtUsuario.text + 'AND senha=' + edtSenha.Text + ';' ;
+  zqryrel1.SQL.Text := 'SELECT nome,senha FROM users WHERE nome = :user AND senha=:senha';
+  zqryrel1.ParamByName('user').AsString := edtUsuario.Text;
+  zqryrel1.ParamByName('senha').AsString := edtSenha.Text;
   zqryrel1.Open;
     if zqryrel1.RecordCount = 0 then
     begin
-      ShowMessage('Senha correta!');
+      ShowMessage('Login ou Senha incorretos!');
     end
     else
     begin
-      ShowMessage('Senha incorreta!');
+      ShowMessage('Senha correta!');
+      UMenu := TMenu.Create(Aplication);
+      UMenu.Show;
     end;
 
 

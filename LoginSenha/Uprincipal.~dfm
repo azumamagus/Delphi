@@ -78,13 +78,14 @@ object Form1: TForm1
     TabOrder = 3
   end
   object ZConnection1: TZConnection
-    Protocol = 'postgresql-8'
-    HostName = '192.168.25.80'
+    ControlsCodePage = cGET_ACP
+    AutoEncodeStrings = False
+    HostName = 'localhost'
     Port = 5432
     Database = 'programa'
     User = 'postgres'
     Password = 'dificil!@#$'
-    Connected = True
+    Protocol = 'postgresql-8'
     Left = 8
     Top = 104
   end
